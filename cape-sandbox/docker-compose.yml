@@ -1,0 +1,33 @@
+services:
+  connector-cape-sandbox:
+    image: opencti/connector-cape-sandbox:6.7.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - OPENCTI_URL=http://docker-opencti-1:8080
+      - OPENCTI_TOKEN=2b0d18eb-dd94-4791-8384-1552af828755
+      - CONNECTOR_ID=CAPEv2_Sandbox
+      - "CONNECTOR_NAME=CAPEv2 Sandbox"
+      - CONNECTOR_SCOPE=StixFile,Artifact
+      - CONNECTOR_AUTO=false # Enable/disable auto-enrichment of observables
+      - CONNECTOR_LOG_LEVEL=error
+      - CAPE_SANDBOX_URL=http://172.16.11.176:6493/apiv2 # https://Base_URL/apiv2
+      - CAPE_SANDBOX_TOKEN=aed639b2f8327fd58a12f2cedd524c1f0a23d354 # Change if using auth
+      - CAPE_SANDBOX_ROUTE=internet # Network routing, other examples include: none, internet, vpn0
+      - CAPE_SANDBOX_TIMEOUT=10 # Maximum amount of seconds to run the analysis for
+      - CAPE_SANDBOX_ENFORCE_TIMEOUT=false # Enforce analysis to run for the full timeout period
+      - CAPE_SANDBOX_PRIORITY=1 # Set priority for submitted samples, 1-3, where 3 is highest priority
+      - CAPE_SANDBOX_TRY_EXTRACT=false # Try and extract configs statically without a VM first (this is currently buggy on CAPEv2 side)
+      - CAPE_SANDBOX_OPTIONS=procmemdump=1,import_reconstruction=1,fake-rdtsc=1 # List of options to be passed to the analysis package
+      - CAPE_SANDBOX_LESS_NOISE=true # Only upload Artifacts associated with Yara rule matches
+      - CAPE_SANDBOX_COOLDOWN_TIME=20 # Set the amount of seconds to wait between retries of the API
+      - CAPE_SANDBOX_MAX_RETRIES=10 # Set the amount of maximum retries for the API before failing
+      - CAPE_SANDBOX_MAX_TLP=TLP:AMBER
+    restart: always
+    networks:
+      - opencti-shared
+
+networks:
+  opencti-shared:
+    external: true
