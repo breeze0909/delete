@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     environment:
       - OPENCTI_URL=http://docker-opencti-1:8080
-      - OPENCTI_TOKEN=1f144533-583a-4bb5-863c-451bbdc09d49
+      - OPENCTI_TOKEN=2b0d18eb-dd94-4791-8384-1552af828755
       - CONNECTOR_ID=8db780d8-45e0-4e0f-9c75-de17de42fe3f
       - "CONNECTOR_NAME=MITRE Datasets"
       - CONNECTOR_SCOPE=tool,report,malware,identity,campaign,intrusion-set,attack-pattern,course-of-action,x-mitre-data-source,x-mitre-data-component,x-mitre-matrix,x-mitre-tactic,x-mitre-collection

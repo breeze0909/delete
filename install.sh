@@ -27,5 +27,5 @@ EOF
 export $(cat .env | grep -v "#" | xargs)
 sudo sysctl -w vm.max_map_count=1048575
 
-echo 'vm.max_map_count=1048575' | sudo tee -a /etc/sysctl.conf
+#echo 'vm.max_map_count=1048575' | sudo tee -a /etc/sysctl.conf
 
