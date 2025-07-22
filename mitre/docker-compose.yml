@@ -1,0 +1,23 @@
+services:
+  connector-mitre:
+    image: opencti/connector-mitre:6.7.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - OPENCTI_URL=http://docker-opencti-1:8080
+      - OPENCTI_TOKEN=1f144533-583a-4bb5-863c-451bbdc09d49
+      - CONNECTOR_ID=8db780d8-45e0-4e0f-9c75-de17de42fe3f
+      - "CONNECTOR_NAME=MITRE Datasets"
+      - CONNECTOR_SCOPE=tool,report,malware,identity,campaign,intrusion-set,attack-pattern,course-of-action,x-mitre-data-source,x-mitre-data-component,x-mitre-matrix,x-mitre-tactic,x-mitre-collection
+      - CONNECTOR_RUN_AND_TERMINATE=false
+      - CONNECTOR_LOG_LEVEL=error
+      - MITRE_REMOVE_STATEMENT_MARKING=true
+      - MITRE_INTERVAL=7 # In days
+    restart: always
+    networks:
+      - opencti-shared
+
+networks:
+  opencti-shared:
+    external: true
